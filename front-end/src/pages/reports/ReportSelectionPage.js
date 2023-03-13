@@ -5,7 +5,7 @@ function ReportSelectionPage() {
     return <Container fluid>
         <NavMenu/>
         <Row className="mt-5 mb-4">
-            <h1>Account Settings</h1>
+            <h1>Reports</h1>
         </Row>
         <Stack gap={5}>
             <Col><Button>View Monthly Reports</Button></Col>
