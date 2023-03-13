@@ -20,9 +20,9 @@ function Calendar() {
 
     function createWeeks() {
         return (dates ?? []).map((week, idx) => (
-            <Row>
+            <Row key={week}>
                 {week.map(day => (
-                    <Col className="mb-2">
+                    <Col key={day + "_" + idx} className="mb-2">
                         <Card>
                             {day != 0 ? day : null}
                         </Card>

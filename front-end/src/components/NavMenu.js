@@ -1,14 +1,13 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 
 function NavMenu() {
-    return <Navbar>
-        <Container>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+    return <Navbar bg="secondary">
+          <Nav>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/settings">Account Settings</Nav.Link>
+            <Nav.Link href="/reports">Reports</Nav.Link>
+            <Nav.Link href="/login">Log Out</Nav.Link>
           </Nav>
-        </Container>
     </Navbar>
 }
 export default NavMenu;

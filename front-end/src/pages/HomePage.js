@@ -24,7 +24,7 @@ function HomePage() {
         </Card>
     }
 
-    return <Container>
+    return <Container fluid>
         <NavMenu/>
         <Row className="mb-4">
             <Col className="mt-5">
@@ -37,12 +37,6 @@ function HomePage() {
             </Col>
             <Col>
                 {getOptionsCard()}
-                {/* <Stack className="border" gap={3}>
-                    <h2 className="mt-3 text-center">3/6/2023 - 3/12/2022</h2>
-                    <Button className="mx-5 px-3 py-3">Check Payroll Information</Button>
-                    <Button className="mx-5 px-3 py-3">View Selected Schedule</Button>
-                    <Button className="mx-5 px-3 py-3 mb-3">Send Confirmation Email</Button>
-                </Stack> */}
             </Col>
         </Row>
         <Row>

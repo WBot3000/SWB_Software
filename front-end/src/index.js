@@ -12,11 +12,16 @@ import SignupPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 
+import AccountSettingsPage from './pages/account-settings/AccountSettingsPage';
+import ReportSelectionPage from './pages/reports/ReportSelectionPage';
+
 const router = createBrowserRouter(
     createRoutesFromElements(<>
         <Route path='/' element={<HomePage/>}/>
         <Route path='login' element={<LoginPage/>}/>
         <Route path='signup' element={<SignupPage/>}/>
+        <Route path='settings' element={<AccountSettingsPage/>}/>
+        <Route path='reports' element={<ReportSelectionPage/>}/>
         <Route path="*" element={<ErrorPage/>}/>
     </>)
 );
