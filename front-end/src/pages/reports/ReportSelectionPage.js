@@ -1,18 +1,15 @@
-import { Container, Row, Col, Button, Stack } from "react-bootstrap";
-import NavMenu from "../../components/NavMenu";
+import { Col, Button, Stack } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import PageContainer from "../../components/PageContainer";
 
 function ReportSelectionPage() {
-    return <Container fluid>
-        <NavMenu/>
-        <Row className="mt-5 mb-4">
-            <h1>Reports</h1>
-        </Row>
+    return <PageContainer pageName="Reports">
         <Stack gap={5}>
-            <Col><Button>View Monthly Reports</Button></Col>
-            <Col><Button>View Fiscal Year Reports</Button></Col>
-            <Col><Button>View Student Reports</Button></Col>
+            <Col><Link to="monthly"><Button>View Monthly Reports</Button></Link></Col>
+            <Col><Link to="yearly"><Button>View Fiscal Year Reports</Button></Link></Col>
+            <Col><Link to="students"><Button>View Student Reports</Button></Link></Col>
         </Stack>
-    </Container>
+    </PageContainer>
 
 }
 export default ReportSelectionPage;

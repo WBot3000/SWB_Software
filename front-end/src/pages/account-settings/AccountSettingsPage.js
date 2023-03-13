@@ -1,10 +1,11 @@
-import {Button, Container, Row, Col, Stack} from "react-bootstrap"
+import {Button, Row, Col, Stack} from "react-bootstrap"
 import { useState } from "react";
-import NavMenu from "../../components/NavMenu";
+import PageContainer from "../../components/PageContainer";
 import DropdownField from "../../components/DropdownField";
 import InlineTextField from "../../components/InlineTextField";
 
 import { toMonetaryValue } from "../../formatting";
+import { Link } from "react-router-dom";
 
 function validateMonetaryField(field) {
     let numField = Number(field)
@@ -26,7 +27,6 @@ function validateMonetaryField(field) {
 }
 
 function AccountSettingsPage() {
-
     //State
     //Year data, will be gotten from the database
     const [yearlyInfo, setYearlyInfo] = useState([
@@ -68,15 +68,12 @@ function AccountSettingsPage() {
         validateMonetaryField(payrateField);
     }
 
-    return <Container fluid>
-        <NavMenu/>
-        <Row className="mt-5 mb-4">
-            <h1>Account Settings</h1>
-        </Row>
+    return <PageContainer pageName="Account Settings">
         <Row className="mb-4">
             <Col>
                 <DropdownField
                     items={[...Array(yearlyInfo.length).keys()]}
+                    itemType="year"
                     displayItems={yearlyInfo.map(info => info.year)}
                     selectedItem={yearlyInfo[selectedYearIdx]?.year}
                     setStateFunc={setSelectedYearIdx}
@@ -86,29 +83,30 @@ function AccountSettingsPage() {
         <Row className="mb-4">
             <p>Budget: {selectedYearIdx ? `${toMonetaryValue(yearlyInfo[selectedYearIdx].budget)}` : "Select a year to see the budget"}</p>
             <InlineTextField label="Set New Budget" controlId="settings.budget"
-                setStateFunc={setBudgetField} submitFunc={alterBudgetForSelectedYear} 
+                setStateFunc={setBudgetField}
                 type="number"
                 value={budgetField}
-                buttonLabel="Set New Budget"
-                disabled={!selectedYearIdx}/>
+                disabled={!selectedYearIdx}
+                submittable
+                submitFunc={alterBudgetForSelectedYear} buttonLabel="Set New Budget"/>
         </Row>
         <Row className="mb-4">
             <p>Payrate: {selectedYearIdx ? `${toMonetaryValue(yearlyInfo[selectedYearIdx].payrate)}/hour` : "Select a year to see the payrate"}</p>
             <InlineTextField label="Set New Payrate" controlId="settings.payrate"
-                setStateFunc={setPayrateField} submitFunc={alterPayrateForSelectedYear}
+                setStateFunc={setPayrateField}
                 type="number"
                 value={payrateField}
-                buttonLabel="Set New Payrate"
-                disabled={!selectedYearIdx}/>
+                submittable
+                submitFunc={alterPayrateForSelectedYear} buttonLabel="Set New Payrate"/>
         </Row>
         <Row className="mb-4">
             <h2>Student Workers</h2>
         </Row>
         <Row className="mb-4">
             <Stack direction="horizontal" gap={4}>
-                <Button>Add Student Worker</Button>
-                <Button>Remove Student Worker</Button>
-                <Button>Change Unavailability Times</Button>
+                <Link to="addstudent"><Button>Add Student Worker</Button></Link>
+                <Link to="removestudent"><Button>Remove Student Worker</Button></Link>
+                <Link to="changeunavailability"><Button>Change Student Unavailability</Button></Link>
             </Stack>
         </Row>
         <Row className="mb-4">
@@ -116,12 +114,12 @@ function AccountSettingsPage() {
         </Row>
         <Row>
             <Stack direction="horizontal" gap={4}>
-                <Button>Create New Shift</Button>
-                <Button>Delete Shift</Button>
-                <Button>Add Shift Exception</Button>
-                <Button>Remove Shift Exception</Button>
+                <Link to="createshift"><Button>Create New Shift</Button></Link>
+                <Link to="deleteshift"><Button>Delete Shift</Button></Link>
+                <Link to="addshiftexception"><Button>Add Shift Exception</Button></Link>
+                <Link to="removeshiftexception"><Button>Remove Shift Exception</Button></Link>
             </Stack>
         </Row>
-    </Container>
+    </PageContainer>
 }
 export default AccountSettingsPage;

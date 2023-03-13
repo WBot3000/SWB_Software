@@ -1,4 +1,8 @@
+import PageContainer from "../../components/PageContainer";
+
 function StudentReportsPage() {
-    //TODO: Implement
+    return <PageContainer pageName="Student Reports">
+
+    </PageContainer>
 }
 export default StudentReportsPage;

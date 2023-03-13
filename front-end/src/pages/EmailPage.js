@@ -1,4 +1,8 @@
+import PageContainer from "../components/PageContainer";
+
 function EmailPage() {
-    //TODO: Implement
+    return <PageContainer pageName="Schedule Email">
+
+    </PageContainer>
 }
 export default EmailPage;

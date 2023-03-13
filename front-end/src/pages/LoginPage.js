@@ -1,6 +1,7 @@
 import {Container, Row, Col, Form, Button} from "react-bootstrap"
 import TextFormField from "../components/TextFormField";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
 
@@ -31,7 +32,7 @@ function LoginPage() {
                             Login
                         </Button>
 
-                        <p>Need an account? Click here to sign up!</p>
+                        <p>Need an account? <Link to="/signup">Click here to sign up!</Link></p>
                     </Container>
                 </Form>
             </Col>

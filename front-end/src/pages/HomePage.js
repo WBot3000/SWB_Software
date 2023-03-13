@@ -1,9 +1,11 @@
-import {Container, Row, Col, Card, Button, Stack} from "react-bootstrap"
+import { Container, Row, Col, Card, Button, Stack } from "react-bootstrap"
+import PageContainer from "../components/PageContainer";
 import Calendar from "../components/Calendar";
 import NavMenu from "../components/NavMenu";
 
 import { useState } from "react";
 import MonthlyReport from "../components/MonthlyReport";
+import { Link } from "react-router-dom";
 
 function HomePage() {
 
@@ -15,22 +17,16 @@ function HomePage() {
                 <>
                     <h2 className="mt-3 mb-3 text-center">3/6/2023 - 3/12/2022</h2>
                     <Stack gap={3}>
-                        <Button className="mx-5 px-3 py-3">Check Payroll Information</Button>
-                        <Button className="mx-5 px-3 py-3">View Selected Schedule</Button>
-                        <Button className="mx-5 px-3 py-3 mb-3">Send Confirmation Email</Button>
+                        <Link to="payroll"><Button className="mx-5 px-3 py-3">Check Payroll Information</Button></Link>
+                        <Link to="schedule"><Button className="mx-5 px-3 py-3">View Selected Schedule</Button></Link>
+                        <Link to="email"><Button className="mx-5 px-3 py-3 mb-3">Send Confirmation Email</Button></Link>
                     </Stack>
                 </>
             }
         </Card>
     }
 
-    return <Container fluid>
-        <NavMenu/>
-        <Row className="mb-4">
-            <Col className="mt-5">
-                <h1>Welcome ACCOUNT_NAME</h1>
-            </Col>
-        </Row>
+    return <PageContainer pageName="Welcome ACCOUNT_NAME">
         <Row>
             <Col>
                 <Calendar/>
@@ -39,11 +35,6 @@ function HomePage() {
                 {getOptionsCard()}
             </Col>
         </Row>
-        <Row>
-            <Col>
-                <MonthlyReport/>
-            </Col>
-        </Row>
-    </Container>
+    </PageContainer>
 }
 export default HomePage;
