@@ -51,7 +51,7 @@ function MonthlyReportsPage() {
             <Col>
                 <DropdownField
                     items={[...Array(yearlyInfo.length).keys()]}
-                    itemType="year"
+                    itemType="Year"
                     displayItems={yearlyInfo.map(info => info.year)}
                     selectedItem={yearlyInfo[selectedYearIdx]?.year}
                     setStateFunc={setSelectedYearIdx}
@@ -60,7 +60,7 @@ function MonthlyReportsPage() {
             <Col xs={10}>
                 <DropdownField
                     items={[...Array(monthlyInfo.length).keys()]}
-                    itemType="month"
+                    itemType="Month"
                     displayItems={monthlyInfo}
                     selectedItem={monthlyInfo[selectedMonthIdx]}
                     setStateFunc={setSelectedMonthIdx}
