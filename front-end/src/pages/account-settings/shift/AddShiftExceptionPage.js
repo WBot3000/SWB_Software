@@ -1,4 +1,8 @@
+import PageContainer from "../../../components/PageContainer";
+
 function AddShiftExceptionPage() {
-    //TODO: Implement
+    return <PageContainer pageName="Add Shift Exception">
+
+    </PageContainer>
 }
 export default AddShiftExceptionPage;

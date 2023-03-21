@@ -1,4 +1,8 @@
+import PageContainer from "../components/PageContainer";
+
 function WeeklySchedulePage() {
-    //TODO: Implement
+    return <PageContainer pageName="Schedule for WEEK">
+
+    </PageContainer>
 }
 export default WeeklySchedulePage;

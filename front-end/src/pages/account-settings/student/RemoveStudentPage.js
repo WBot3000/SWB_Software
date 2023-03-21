@@ -1,4 +1,8 @@
+import PageContainer from "../../../components/PageContainer";
+
 function RemoveStudentPage() {
-    //TODO: Implement
+    return <PageContainer pageName="Remove Student Worker">
+    
+    </PageContainer>
 }
 export default RemoveStudentPage;
