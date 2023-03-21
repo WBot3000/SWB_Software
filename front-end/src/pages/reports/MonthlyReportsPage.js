@@ -3,46 +3,36 @@ import PageContainer from "../../components/PageContainer";
 import DropdownField from "../../components/DropdownField";
 import MonthlyReport from "../../components/MonthlyReport";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchYearlyInfo, fetchMonthlyBudgetInfo } from "../../utility/data";
 
 function MonthlyReportsPage() {
     //State
     //Year data, will be gotten from the database
-    const [yearlyInfo, setYearlyInfo] = useState([
-        {
-            year: "July 2020 - June 2021",
-            budget: 60000,
-            payrate: 15
-        },
-        {
-            year: "July 2021 - June 2022",
-            budget: 57500,
-            payrate: 15.25
-        },
-        {
-            year: "July 2022 - June 2023",
-            budget: 72000,
-            payrate: 16.50
+    const [yearlyInfo, setYearlyInfo] = useState([]);
+
+    useEffect(() => {
+        async function setYearlyInfoAsync() {
+            let info = await fetchYearlyInfo();
+            setYearlyInfo(info);
         }
-    ])
+        setYearlyInfoAsync();
+    }, [])
+
     //Index of the selected year data
-    const [selectedYearIdx, setSelectedYearIdx] = useState(null)
+    const [selectedYearIdx, setSelectedYearIdx] = useState(null);
 
     //Month data, will be gotten from the database (and will depend on selected year)
-    const [monthlyInfo, setMonthlyInfo] = useState([
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June"
-    ])
+    const [monthlyBudgetInfo, setMonthlyBudgetInfo] = useState([]);
+
+    useEffect(() => {
+        async function setMonthlyBudgetInfoAsync() {
+            let info = await fetchMonthlyBudgetInfo();
+            setMonthlyBudgetInfo(info);
+        }
+        setMonthlyBudgetInfoAsync();
+    }, [selectedYearIdx])
+
     //Index of the selected year data
     const [selectedMonthIdx, setSelectedMonthIdx] = useState(null)
 
@@ -59,10 +49,10 @@ function MonthlyReportsPage() {
             </Col>
             <Col xs={10}>
                 <DropdownField
-                    items={[...Array(monthlyInfo.length).keys()]}
+                    items={[...Array(monthlyBudgetInfo.length).keys()]}
                     itemType="Month"
-                    displayItems={monthlyInfo}
-                    selectedItem={monthlyInfo[selectedMonthIdx]}
+                    displayItems={monthlyBudgetInfo}
+                    selectedItem={monthlyBudgetInfo[selectedMonthIdx]}
                     setStateFunc={setSelectedMonthIdx}
                     disabled={!selectedYearIdx}
                 />

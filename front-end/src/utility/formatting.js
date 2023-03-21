@@ -1,8 +1,22 @@
+/*
+    This file contains data and functions that help with formatting the data on the front end.
+ */
+
+//Breakpoint boundaries from sm - xxl in pixels
+//If we want to alter the default breakpoints for any reason, use this (turn values into an array)
+export const breakpoints = {
+    sm: 576, 
+    md: 768, 
+    lg: 992, 
+    xl: 1200, 
+    xxl: 1400
+}
+
 export const months = ["July", "August", "September", "October", 
 "November", "December", "January", "February", 
 "March", "April", "May", "June"]
 
-export const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", 
+export const daysOfWeek = ["Monday", "Tuesday", "Wednesday", 
 "Thursday", "Friday", "Saturday", "Sunday"]
 
 const MONEY_FORMATTER = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
@@ -33,11 +47,4 @@ export function toMonthDay(date) {
     let month = months[(date.getMonth() + 6) % 12];
     let dateDay = date.getDate();
     return month + " " + dateDay;
-}
-
-//Not really a formatting function, but putting it here for now
-export function calculateTimeDiffInHours(startTime, endTime) {
-    let diffInMS = endTime.getTime() - startTime.getTime();
-    //1000 milliseconds per second, 60 seconds per minute, 60 minutes per hour
-    return diffInMS / (1000*60*60)
 }

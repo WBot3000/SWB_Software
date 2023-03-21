@@ -1,5 +1,6 @@
 import { Card } from "react-bootstrap";
-import { calculateTimeDiffInHours, daysOfWeek, toMonthDay, toTimeFormat } from "../formatting";
+import { daysOfWeek, toMonthDay, toTimeFormat } from "../utility/formatting";
+import { calculateTimeDiffInHours } from "../utility/time";
 
 function organizeShifts(shifts=[]) {
     let organizedShifts =[

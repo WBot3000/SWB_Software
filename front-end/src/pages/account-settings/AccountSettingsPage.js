@@ -1,10 +1,11 @@
 import {Button, Row, Col, Stack} from "react-bootstrap"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PageContainer from "../../components/PageContainer";
 import DropdownField from "../../components/DropdownField";
 import InlineTextField from "../../components/InlineTextField";
 
-import { toMonetaryValue } from "../../formatting";
+import { fetchYearlyInfo } from "../../utility/data";
+import { toMonetaryValue } from "../../utility/formatting";
 import { Link } from "react-router-dom";
 
 function validateMonetaryField(field) {
@@ -29,23 +30,16 @@ function validateMonetaryField(field) {
 function AccountSettingsPage() {
     //State
     //Year data, will be gotten from the database
-    const [yearlyInfo, setYearlyInfo] = useState([
-        {
-            year: "July 2020 - June 2021",
-            budget: 60000,
-            payrate: 15
-        },
-        {
-            year: "July 2021 - June 2022",
-            budget: 57500,
-            payrate: 15.25
-        },
-        {
-            year: "July 2022 - June 2023",
-            budget: 72000,
-            payrate: 16.50
+    const [yearlyInfo, setYearlyInfo] = useState([]);
+
+    useEffect(() => {
+        async function setYearlyInfoAsync() {
+            let info = await fetchYearlyInfo();
+            setYearlyInfo(info);
         }
-    ])
+        setYearlyInfoAsync();
+    }, [])
+
     //Index of the selected year data
     const [selectedYearIdx, setSelectedYearIdx] = useState(null)
 

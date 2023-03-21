@@ -1,10 +1,8 @@
 import { Container, Row, Col, Card, Button, Stack } from "react-bootstrap"
 import PageContainer from "../components/PageContainer";
 import Calendar from "../components/Calendar";
-import NavMenu from "../components/NavMenu";
 
 import { useState } from "react";
-import MonthlyReport from "../components/MonthlyReport";
 import { Link } from "react-router-dom";
 
 function HomePage() {
