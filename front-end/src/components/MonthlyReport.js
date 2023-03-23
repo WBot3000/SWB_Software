@@ -1,6 +1,7 @@
 import {Container, Row, Col, Table} from "react-bootstrap"
 
 import { useState } from "react";
+import { toMonetaryValue } from "../utility/formatting";
 
 function MonthlyReport() {
     /*
@@ -45,9 +46,9 @@ function MonthlyReport() {
                 <tr>
                     <td>Week {weekIdx+1}</td>
                     {week.map(amount => (
-                        <td>{amount < 0 ? "---" : amount}</td>
+                        <td>{amount < 0 ? "---" : toMonetaryValue(amount)}</td>
                     ))}
-                    <td>{addNonNegatives(week)}</td>
+                    <td>{toMonetaryValue(addNonNegatives(week))}</td>
                 </tr>
             ))}
       </tbody>

@@ -53,6 +53,22 @@ export async function fetchMonthlyBudgetInfo(yearId) {
 }
 
 //NOTE: Will probably require some week identifier to be passed when made to communicate with backend
+export async function fetchStudentInfo() {
+    return [
+        {
+            id: "12345678",
+            name: "Student A",
+            email: "studenta#gmail.com"
+        },
+        {
+            id: "87654321",
+            name: "Student B",
+            email: "studentb#gmail.com"
+        }
+    ];
+}
+
+//NOTE: Will probably require some week identifier to be passed when made to communicate with backend
 export async function fetchWeeklyStudentInfo() {
     return [
         {

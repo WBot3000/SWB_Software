@@ -23,6 +23,8 @@ function CreateShiftPage() {
     const [shiftType, setShiftType] = useState(null);
 
     const [dayOfWeek, setDayOfWeek] = useState(null);
+
+    //We could just make it so that the user can only create shifts for the current year...
     //const [selectedYearIdx, setSelectedYearIdx] = useState(null);
 
     //TODO: State for single day field
@@ -57,6 +59,7 @@ function CreateShiftPage() {
         }
     }
 
+    //TODO: Add year to shift page
     return <PageContainer pageName="Create New Shift">
         <Row className="mb-5">
             <Col>
