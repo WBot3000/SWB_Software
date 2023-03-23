@@ -16,6 +16,10 @@ export const months = ["July", "August", "September", "October",
 "November", "December", "January", "February", 
 "March", "April", "May", "June"]
 
+//Starts at July just like the months do
+//Use separate logic to check for February leap years
+export const lastDaysOfMonths = [31, 31, 30, 31, 30, 31, 31, 28, 31, 30, 31, 30];
+
 export const daysOfWeek = ["Monday", "Tuesday", "Wednesday", 
 "Thursday", "Friday", "Saturday", "Sunday"]
 
@@ -47,4 +51,12 @@ export function toMonthDay(date) {
     let month = months[(date.getMonth() + 6) % 12];
     let dateDay = date.getDate();
     return month + " " + dateDay;
+}
+
+//Converts a Javascript date to a month and year string
+export function toMonthYear(date) {
+    //Same logic as in toMonthDay
+    let month = months[(date.getMonth() + 6) % 12];
+    let dateYear = date.getFullYear();
+    return month + " " + dateYear
 }
