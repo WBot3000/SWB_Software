@@ -10,6 +10,8 @@ import { breakpoints, daysOfWeek } from "../../../utility/formatting";
 
 function CreateShiftPage() {
 
+    
+
     const [shiftNameField, setShiftNameField] = useState("");
 
     const [startHour, setStartHour] = useState(null);

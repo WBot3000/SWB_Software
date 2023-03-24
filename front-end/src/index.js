@@ -22,8 +22,8 @@ import RemoveStudentPage from './pages/account-settings/student/RemoveStudentPag
 import ChangeStudentUnavailabilityPage from './pages/account-settings/student/ChangeStudentUnavailabilityPage';
 import CreateShiftPage from './pages/account-settings/shift/CreateShiftPage';
 import DeleteShiftPage from './pages/account-settings/shift/DeleteShiftPage';
-import AddShiftExceptionPage from './pages/account-settings/shift/AddShiftExceptionPage';
-import RemoveShiftExceptionPage from './pages/account-settings/shift/RemoveShiftExceptionPage';
+import AddDayExceptionPage from './pages/account-settings/shift/AddDayExceptionPage';
+import RemoveDayExceptionPage from './pages/account-settings/shift/RemoveDayExceptionPage';
 
 import ReportSelectionPage from './pages/reports/ReportSelectionPage';
 import MonthlyReportsPage from './pages/reports/MonthlyReportsPage';
@@ -47,8 +47,8 @@ const router = createBrowserRouter(
         <Route path='settings/changeunavailability' element={<ChangeStudentUnavailabilityPage/>}/>
         <Route path='settings/createshift' element={<CreateShiftPage/>}/>
         <Route path="settings/deleteshift" element={<DeleteShiftPage/>}/>
-        <Route path="settings/addshiftexception" element={<AddShiftExceptionPage/>}/>
-        <Route path="settings/removeshiftexception" element={<RemoveShiftExceptionPage/>}/>
+        <Route path="settings/adddayexception" element={<AddDayExceptionPage/>}/>
+        <Route path="settings/removedayexception" element={<RemoveDayExceptionPage/>}/>
 
         <Route path='reports' element={<ReportSelectionPage/>}/>
         <Route path='reports/monthly' element={<MonthlyReportsPage/>}/>

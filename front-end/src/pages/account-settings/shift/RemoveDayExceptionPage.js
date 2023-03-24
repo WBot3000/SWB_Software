@@ -1,8 +1,8 @@
 import PageContainer from "../../../components/PageContainer";
 
 function RemoveShiftExceptionPage() {
-    return <PageContainer pageName="Remove Shift Exception">
+    return <PageContainer pageName="Remove Day Exception">
 
     </PageContainer>
 }
-export default RemoveShiftExceptionPage;
+export default RemoveDayExceptionPage;

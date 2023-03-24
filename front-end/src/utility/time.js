@@ -14,3 +14,17 @@ export function calculateTimeDiffInHours(startTime, endTime) {
 export function validTimeRange(startTime, endTime) {
     return endTime.getTime() >= startTime.getTime();
 }
+
+//Gets the current financial year that the user is in as a string
+export function getCurrentFinancialYear() {
+    let now = new Date();
+    let currYear = now.getFullYear();
+    let currMonth = now.getMonth();
+    //From January to June, this means that you're in the latter half of the financial year
+    if(currMonth > 6) {
+        return `July ${currYear - 1} - June ${currYear};`;
+    }
+    else { //July - December
+        return `July ${currYear} - June ${currYear + 1}`;
+    }
+}

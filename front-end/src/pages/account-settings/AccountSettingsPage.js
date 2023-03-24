@@ -41,11 +41,11 @@ function AccountSettingsPage() {
     }, [])
 
     //Index of the selected year data
-    const [selectedYearIdx, setSelectedYearIdx] = useState(null)
+    const [selectedYearIdx, setSelectedYearIdx] = useState(null);
 
     //Fields
-    const [budgetField, setBudgetField] = useState(null)
-    const [payrateField, setPayrateField] = useState(null)
+    const [budgetField, setBudgetField] = useState(null);
+    const [payrateField, setPayrateField] = useState(null);
 
     //Functions
     //TODO: Add DB functions
