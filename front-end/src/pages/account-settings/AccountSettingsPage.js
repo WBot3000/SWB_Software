@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import PageContainer from "../../components/PageContainer";
 import DropdownField from "../../components/DropdownField";
 import InlineTextField from "../../components/InlineTextField";
+import NavButton from "../../components/NavButton";
 
 import { fetchYearlyInfo } from "../../utility/data";
 import { toMonetaryValue } from "../../utility/formatting";
-import { Link } from "react-router-dom";
 
 function validateMonetaryField(field) {
     let numField = Number(field)
@@ -99,9 +99,9 @@ function AccountSettingsPage() {
         </Row>
         <Row className="mb-4">
             <Stack direction="horizontal" gap={4}>
-                <Link to="addstudent"><Button>Add Student Worker</Button></Link>
-                <Link to="removestudent"><Button>Remove Student Worker</Button></Link>
-                <Link to="changeunavailability"><Button>Change Student Unavailability</Button></Link>
+                <NavButton to="addstudent">Add Student Worker</NavButton>
+                <NavButton to="removestudent">Remove Student Worker</NavButton>
+                <NavButton to="changeunavailability">Change Student Unavailability</NavButton>
             </Stack>
         </Row>
         <Row className="mb-4">
@@ -109,10 +109,10 @@ function AccountSettingsPage() {
         </Row>
         <Row>
             <Stack direction="horizontal" gap={4}>
-                <Link to="createshift"><Button>Create New Shift</Button></Link>
-                <Link to="deleteshift"><Button>Delete Shift</Button></Link>
-                <Link to="addshiftexception"><Button>Add Shift Exception</Button></Link>
-                <Link to="removeshiftexception"><Button>Remove Shift Exception</Button></Link>
+                <NavButton to="createshift">Create New Shift</NavButton>
+                <NavButton to="deleteshift">Delete Shift</NavButton>
+                <NavButton to="adddayexception">Add Day Exception</NavButton>
+                <NavButton to="removedayexception">Remove Day Exception</NavButton>
             </Stack>
         </Row>
     </PageContainer>
