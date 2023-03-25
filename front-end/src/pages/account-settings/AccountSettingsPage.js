@@ -5,8 +5,8 @@ import DropdownField from "../../components/DropdownField";
 import InlineTextField from "../../components/InlineTextField";
 import NavButton from "../../components/NavButton";
 
-import { fetchYearlyInfo } from "../../utility/data";
 import { toMonetaryValue } from "../../utility/formatting";
+import { useYearlyInfo } from "../../utility/useYearlyInfo";
 
 function validateMonetaryField(field) {
     let numField = Number(field)
@@ -30,15 +30,7 @@ function validateMonetaryField(field) {
 function AccountSettingsPage() {
     //State
     //Year data, will be gotten from the database
-    const [yearlyInfo, setYearlyInfo] = useState([]);
-
-    useEffect(() => {
-        async function setYearlyInfoAsync() {
-            let info = await fetchYearlyInfo();
-            setYearlyInfo(info);
-        }
-        setYearlyInfoAsync();
-    }, [])
+    const yearlyInfo = useYearlyInfo();
 
     //Index of the selected year data
     const [selectedYearIdx, setSelectedYearIdx] = useState(null);

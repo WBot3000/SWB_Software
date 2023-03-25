@@ -1,24 +1,16 @@
 import PageContainer from "../../components/PageContainer";
 import { Row, Col } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import { fetchYearlyInfo } from "../../utility/data";
 import { months, toMonetaryValue } from "../../utility/formatting";
 
 import DropdownField from "../../components/DropdownField";
+import { useYearlyInfo } from "../../utility/useYearlyInfo";
 
 function YearlyReportsPage() {
     //State
     //Year data, will be gotten from the database
-    const [yearlyInfo, setYearlyInfo] = useState([]);
-
-    useEffect(() => {
-        async function setYearlyInfoAsync() {
-            let info = await fetchYearlyInfo();
-            setYearlyInfo(info);
-        }
-        setYearlyInfoAsync();
-    }, [])
+    const yearlyInfo = useYearlyInfo();
 
     //Index of the selected year data
     const [selectedYearIdx, setSelectedYearIdx] = useState(null);

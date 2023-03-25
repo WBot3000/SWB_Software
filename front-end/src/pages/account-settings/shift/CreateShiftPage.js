@@ -1,17 +1,16 @@
-import { Col, Form, Row, ButtonGroup, ToggleButton, Stack } from "react-bootstrap";
+import { Col, Form, Row, ButtonGroup, ToggleButton, Stack, Button } from "react-bootstrap";
 import InlineTextField from "../../../components/InlineTextField";
 import PageContainer from "../../../components/PageContainer";
+import DropdownField from "../../../components/DropdownField";
 import TimePicker from "../../../components/TimePicker";
 import DatePicker from "../../../components/DatePicker";
 
 import { useState } from "react";
+import { useYearlyInfo } from "../../../utility/useYearlyInfo";
 import { useWindowSize } from "../../../utility/useWindowSize";
-import { breakpoints, daysOfWeek } from "../../../utility/formatting";
+import { breakpoints, daysOfWeek, months } from "../../../utility/formatting";
 
 function CreateShiftPage() {
-
-    
-
     const [shiftNameField, setShiftNameField] = useState("");
 
     const [startHour, setStartHour] = useState(null);
@@ -24,12 +23,11 @@ function CreateShiftPage() {
 
     const [shiftType, setShiftType] = useState(null);
 
+    const yearlyInfo = useYearlyInfo();
+    const [selectedYearIdx, setSelectedYearIdx] = useState(null);
+
     const [dayOfWeek, setDayOfWeek] = useState(null);
 
-    //We could just make it so that the user can only create shifts for the current year...
-    //const [selectedYearIdx, setSelectedYearIdx] = useState(null);
-
-    //TODO: State for single day field
     const [selectedMonthIdx, setSelectedMonthIdx] = useState(null);
     const [selectedDay, setSelectedDay] = useState(null);
 
@@ -37,7 +35,7 @@ function CreateShiftPage() {
 
     function getAdditionalSettings() {
         if(shiftType == "weekly") {
-            return <Form>
+            return <Form className="mb-5">
                 <Form.Group>
                     <Stack direction="horizontal" gap={3}>
                         <Form.Label>Day of the Week</Form.Label>
@@ -55,14 +53,37 @@ function CreateShiftPage() {
         }
         if(shiftType == "singleday") {
             return <DatePicker
+                className="mb-5"
                 setMonthFunc={setSelectedMonthIdx}
                 setDayFunc={setSelectedDay}
             />
         }
     }
 
+    //TODO: Add DB functionality and input validation
+    function submitShift() {
+        console.log(`${shiftNameField}: ${startHour}:${startMinute} ${startTimeOfDay} - ${finishHour}:${finishMinute} ${finishTimeOfDay}`);
+        if(shiftType == "weekly") {
+            console.log(`${dayOfWeek}s of ${yearlyInfo[selectedYearIdx].year}`)
+        }
+        if(shiftType == "singleday") {
+            console.log(`${months[selectedMonthIdx]} ${selectedDay} of ${yearlyInfo[selectedYearIdx].year}`)
+        }
+    }
+
     //TODO: Add year to shift page
     return <PageContainer pageName="Create New Shift">
+        <Row className="mb-4">
+            <Col>
+                <DropdownField
+                    items={[...Array(yearlyInfo.length).keys()]}
+                    itemType="Year"
+                    displayItems={yearlyInfo.map(info => info.year)}
+                    selectedItem={yearlyInfo[selectedYearIdx]?.year}
+                    setStateFunc={setSelectedYearIdx}
+                />
+            </Col>
+        </Row>
         <Row className="mb-5">
             <Col>
                 <InlineTextField label="Shift Name" setStateFunc={setShiftNameField}/>
@@ -83,6 +104,7 @@ function CreateShiftPage() {
         <Row>
             {getAdditionalSettings()}
         </Row>
+        {shiftType && <Button onClick={submitShift}>Create Shift</Button>}
     </PageContainer>
 }
 export default CreateShiftPage;

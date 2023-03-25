@@ -15,16 +15,16 @@ export function validTimeRange(startTime, endTime) {
     return endTime.getTime() >= startTime.getTime();
 }
 
-//Gets the current financial year that the user is in as a string
-export function getCurrentFinancialYear() {
+//Gets the current fiscal year that the user is in as a string
+export function getCurrentFiscalYear() {
     let now = new Date();
     let currYear = now.getFullYear();
     let currMonth = now.getMonth();
-    //From January to June, this means that you're in the latter half of the financial year
+    //From July - December, this means that you're in the first half of the fiscal year
     if(currMonth > 6) {
-        return `July ${currYear - 1} - June ${currYear};`;
+        return `July ${currYear} - June ${currYear + 1};`;
     }
-    else { //July - December
-        return `July ${currYear} - June ${currYear + 1}`;
+    else { //Juanuary - June, the latter half of the fiscal year
+        return `July ${currYear - 1} - June ${currYear}`;
     }
 }

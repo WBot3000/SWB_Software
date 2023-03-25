@@ -4,20 +4,13 @@ import DropdownField from "../../components/DropdownField";
 import MonthlyReport from "../../components/MonthlyReport";
 
 import { useState, useEffect } from "react";
-import { fetchYearlyInfo, fetchMonthlyBudgetInfo } from "../../utility/data";
+import { fetchMonthlyReportInfo } from "../../utility/data";
+import { useYearlyInfo } from "../../utility/useYearlyInfo";
 
 function MonthlyReportsPage() {
     //State
     //Year data, will be gotten from the database
-    const [yearlyInfo, setYearlyInfo] = useState([]);
-
-    useEffect(() => {
-        async function setYearlyInfoAsync() {
-            let info = await fetchYearlyInfo();
-            setYearlyInfo(info);
-        }
-        setYearlyInfoAsync();
-    }, [])
+    const yearlyInfo = useYearlyInfo();
 
     //Index of the selected year data
     const [selectedYearIdx, setSelectedYearIdx] = useState(null);
@@ -27,13 +20,13 @@ function MonthlyReportsPage() {
 
     useEffect(() => {
         async function setMonthlyBudgetInfoAsync() {
-            let info = await fetchMonthlyBudgetInfo();
+            let info = await fetchMonthlyReportInfo();
             setMonthlyBudgetInfo(info);
         }
         setMonthlyBudgetInfoAsync();
     }, [selectedYearIdx])
 
-    //Index of the selected year data
+    //Index of the selected monthly budget data
     const [selectedMonthIdx, setSelectedMonthIdx] = useState(null)
 
     return <PageContainer pageName="Monthly Reports">
@@ -51,22 +44,14 @@ function MonthlyReportsPage() {
                 <DropdownField
                     items={[...Array(monthlyBudgetInfo.length).keys()]}
                     itemType="Month"
-                    displayItems={monthlyBudgetInfo}
-                    selectedItem={monthlyBudgetInfo[selectedMonthIdx]}
+                    displayItems={monthlyBudgetInfo.map(mbInfo => mbInfo.month)} //Get monthly values from month data
+                    selectedItem={monthlyBudgetInfo[selectedMonthIdx]?.month}
                     setStateFunc={setSelectedMonthIdx}
                     disabled={!selectedYearIdx}
                 />
             </Col>
         </Row>
-        <Row className="mb-4">
-            <MonthlyReport/>
-        </Row>
-        <Row>
-            <h2 className="mb-2">Monthly Stats</h2>
-            {/*TODO: Set these values based on the selected data */}
-            <p>Month Total: $310.00</p>
-            <p>Total Hours: 240</p>
-        </Row>
+        <MonthlyReport budgetCalendar={monthlyBudgetInfo[selectedMonthIdx]?.budgetCalendar} totalHours={monthlyBudgetInfo[selectedMonthIdx]?.totalHours}/>
     </PageContainer>
 }
 export default MonthlyReportsPage;

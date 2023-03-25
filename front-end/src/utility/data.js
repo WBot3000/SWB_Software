@@ -35,20 +35,152 @@ export async function fetchYearlyInfo() {
 
 //NOTE: When connected to DB, will need to be passed some sort of year identifier so that the appropriate monthly info is collected
 //Will have objects representing the budgets
-export async function fetchMonthlyBudgetInfo(yearId) {
+export async function fetchMonthlyReportInfo(yearId) {
     return [
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June"
+        {
+            month: "July",
+            budgetCalendar: [
+                [-1, -1, -1, -1, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "August",
+            budgetCalendar: [
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "September",
+            budgetCalendar: [
+                [-1, -1, -1, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "October",
+            budgetCalendar: [
+                [-1, -1, -1, -1, -1, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "November",
+            budgetCalendar: [
+                [-1, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "December",
+            budgetCalendar: [
+                [-1, -1, -1, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, -1],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "January",
+            budgetCalendar: [
+                [-1, -1, -1, -1, -1, -1, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "February",
+            budgetCalendar: [
+                [-1, -1, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "March",
+            budgetCalendar: [
+                [-1, -1, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "April",
+            budgetCalendar: [
+                [-1, -1, -1, -1, -1, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "May",
+            budgetCalendar: [
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        },
+        {
+            month: "June",
+            budgetCalendar: [
+                [-1, -1, -1, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, 10, 10],
+                [10, 10, 10, 10, 10, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1]
+            ],
+            totalHours: 240
+        }
     ];
 }
 
@@ -69,7 +201,7 @@ export async function fetchStudentInfo() {
 }
 
 //NOTE: Will probably require some week identifier to be passed when made to communicate with backend
-export async function fetchWeeklyStudentInfo() {
+export async function fetchStudentWeeklyScheduleInfo() {
     return [
         {
             name: "Student A",
@@ -121,7 +253,7 @@ export async function fetchWeeklyStudentInfo() {
 }
 
 //NOTE: Will require passed fields as well (the student and the month)
-export async function fetchMonthlyStudentInfo() {
+export async function fetchStudentMonthlyReportInfo() {
     return [
         {
             name: "Student A",

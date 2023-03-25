@@ -64,7 +64,7 @@ function RemoveStudentPage() {
             <Modal.Header closeButton>
                 <Modal.Title>Confirm Deletion</Modal.Title>
             </Modal.Header>
-            <Modal.Body className="mb-5">
+            <Modal.Body className="mb-2">
                 <Row>
                     <p>Are you sure you want to delete {studentInfo[studentToDeleteIdx ?? 0]?.name}?</p>
                 </Row>

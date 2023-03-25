@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import DropdownField from "../components/DropdownField";
 import PageContainer from "../components/PageContainer";
 import { useState, useEffect } from "react";
-import { fetchWeeklyStudentInfo } from "../utility/data";
+import { fetchStudentWeeklyScheduleInfo } from "../utility/data";
 
 import StudentShiftDisplay from "../components/StudentShiftDisplay";
 
@@ -12,7 +12,7 @@ function WeeklyPayrollPage() {
 
     useEffect(() => {
         async function setStudentInfoAsync() {
-            let info = await fetchWeeklyStudentInfo();
+            let info = await fetchStudentWeeklyScheduleInfo();
             setStudentInfo(info);
         }
         setStudentInfoAsync();
