@@ -5,7 +5,9 @@ import MonthlyReport from "../../components/MonthlyReport";
 
 import { useState, useEffect } from "react";
 import { fetchMonthlyReportInfo } from "../../utility/data";
+import { months } from "../../utility/formatting";
 import { useYearlyInfo } from "../../utility/useYearlyInfo";
+import { useShiftExceptionsForYear } from "../../utility/useShiftExceptionsForYear";
 
 function MonthlyReportsPage() {
     //State
@@ -14,6 +16,9 @@ function MonthlyReportsPage() {
 
     //Index of the selected year data
     const [selectedYearIdx, setSelectedYearIdx] = useState(null);
+
+    //Shift exceptions for the selected year
+    const shiftExceptionsForYear = useShiftExceptionsForYear();
 
     //Month data, will be gotten from the database (and will depend on selected year)
     const [monthlyBudgetInfo, setMonthlyBudgetInfo] = useState([]);
@@ -28,6 +33,11 @@ function MonthlyReportsPage() {
 
     //Index of the selected monthly budget data
     const [selectedMonthIdx, setSelectedMonthIdx] = useState(null)
+
+    const exceptionsForMonth = shiftExceptionsForYear?.filter(exception => {
+        return months[(exception.date.getMonth() + 6) % 12] == months[selectedMonthIdx];
+    });
+
 
     return <PageContainer pageName="Monthly Reports">
         <Row className="mb-4">
@@ -51,7 +61,11 @@ function MonthlyReportsPage() {
                 />
             </Col>
         </Row>
-        <MonthlyReport budgetCalendar={monthlyBudgetInfo[selectedMonthIdx]?.budgetCalendar} totalHours={monthlyBudgetInfo[selectedMonthIdx]?.totalHours}/>
+        <MonthlyReport 
+            budgetCalendar={monthlyBudgetInfo[selectedMonthIdx]?.budgetCalendar} 
+            totalHours={monthlyBudgetInfo[selectedMonthIdx]?.totalHours}
+            exceptions={exceptionsForMonth}
+        />
     </PageContainer>
 }
 export default MonthlyReportsPage;

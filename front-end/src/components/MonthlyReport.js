@@ -1,7 +1,7 @@
-import { Row, Table } from "react-bootstrap"
+import { Row, Col, Table } from "react-bootstrap"
 
 import { useState } from "react";
-import { toMonetaryValue } from "../utility/formatting";
+import { toMonetaryValue, toMonthDay } from "../utility/formatting";
 
 const emptyReport = [
     [-1, -1, -1, -1, -1, -1, -1],
@@ -67,10 +67,20 @@ function MonthlyReport(props) {
             </Table>
         </Row>
         <Row>
-            <h2 className="mb-2">Monthly Stats</h2>
-            {/*TODO: Set these values based on the selected data */}
-            <p>Month Total: {toMonetaryValue(addMonth())}</p>
-            <p>Total Hours: {props.totalHours ?? 0}</p>
+            <Col>
+                <h2 className="mb-2">Monthly Stats</h2>
+                {/*TODO: Set these values based on the selected data */}
+                <p>Month Total: {toMonetaryValue(addMonth())}</p>
+                <p>Total Hours: {props.totalHours ?? 0}</p>
+            </Col>
+            <Col>
+                <h2 className="mb-2">Shift Exceptions This Month</h2>
+                <ul>
+                    {props.exceptions?.map(exception => <li>
+                        {`${exception.shiftName} (${exception.reason}): ${toMonthDay(exception.date)}`}
+                    </li>)}
+                </ul>
+            </Col>
         </Row>
     </>
 }
