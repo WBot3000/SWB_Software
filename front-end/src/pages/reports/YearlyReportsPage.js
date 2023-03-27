@@ -18,15 +18,15 @@ function YearlyReportsPage() {
     //Monthly breakdown data, TODO: Get this from the database
     const [monthlyBreakdownInfo, setMonthlyBreakdownInfo] = useState([
         310.00,
-        350.00,
-        275.00,
-        350.00,
-        350.00,
-        400.00,
-        420.00,
-        380.00,
-        295.00,
-        380.00,
+        310.00,
+        300.00,
+        310.00,
+        300.00,
+        310.00,
+        310.00,
+        280.00,
+        310.00,
+        300.00,
         310.00,
         300.00
     ])

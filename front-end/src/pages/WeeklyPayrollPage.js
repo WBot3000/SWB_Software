@@ -20,16 +20,8 @@ function WeeklyPayrollPage() {
 
     const [selectedStudentIdx, setSelectedStudentIdx] = useState(null);
 
-    let regularShifts = [];
-    let specialShifts = [];
-    studentInfo[selectedStudentIdx]?.weeklyShifts.forEach(shift => {
-        if(shift.type == "regular") {
-            regularShifts.push(shift);
-        }
-        else {
-            specialShifts.push(shift);
-        }
-    });
+    const regularShifts = studentInfo?.[selectedStudentIdx]?.weeklyShifts?.regular;
+    const specialShifts = studentInfo?.[selectedStudentIdx]?.weeklyShifts?.special;
 
     return <PageContainer pageName="Payroll for WEEK">
         <Row>

@@ -33,8 +33,27 @@ export async function fetchYearlyInfo() {
     ];
 }
 
+//NOTE: Will probably require some user and year identifier
+export async function fetchYearlyBudgetInfo(id, yearId) {
+    return [
+        310.00,
+        310.00,
+        300.00,
+        310.00,
+        300.00,
+        310.00,
+        310.00,
+        280.00,
+        310.00,
+        300.00,
+        310.00,
+        300.00
+    ]
+}
+
+//TODO: Fetch all at once, or fetch each time the user makes a request?
 //NOTE: When connected to DB, will need to be passed some sort of year identifier so that the appropriate monthly info is collected
-//Will have objects representing the budgets
+//NOTE 2: Remember to take shift exceptions into account when returning this data
 export async function fetchMonthlyReportInfo(yearId) {
     return [
         {
@@ -47,6 +66,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, 10, 10, 10, 10],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -59,6 +79,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, -1, -1, -1, -1],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -71,6 +92,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, 10, 10, -1, -1],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -83,6 +105,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, 10, 10, 10, 10],
                 [10, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -95,6 +118,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, -1, -1, -1, -1],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -107,6 +131,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, 10, 10, 10, -1],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -119,6 +144,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, 10, 10, 10, 10],
                 [10, 10, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -131,6 +157,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, -1, -1, -1, -1, -1],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -143,6 +170,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, 10, 10, -1, -1],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -155,6 +183,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, 10, 10, 10, 10],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -167,6 +196,7 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, -1, -1, -1, -1],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         },
         {
@@ -179,13 +209,14 @@ export async function fetchMonthlyReportInfo(yearId) {
                 [10, 10, 10, 10, 10, -1, -1],
                 [-1, -1, -1, -1, -1, -1, -1]
             ],
+            exceptions: [],
             totalHours: 240
         }
     ];
 }
 
 //NOTE: Will probably require some week identifier to be passed when made to communicate with backend
-export async function fetchStudentInfo() {
+export async function fetchBasicStudentInfo() {
     return [
         {
             id: "12345678",
@@ -201,105 +232,182 @@ export async function fetchStudentInfo() {
 }
 
 //NOTE: Will probably require some week identifier to be passed when made to communicate with backend
-export async function fetchStudentWeeklyScheduleInfo() {
+export async function fetchStudentWeeklyScheduleInfo(id, weekStart, weekEnd) {
     return [
         {
             name: "Student A",
-            weeklyShifts: [
-                {
-                    name: "Lunch Duty",
-                    type: "regular",
-                    start: new Date(2022, 6, 13, 12, 0),
-                    end: new Date(2022, 6, 13, 15, 0)
-                },
-                {
-                    name: "Lunch Duty",
-                    type: "regular",
-                    start: new Date(2022, 6, 14, 12, 0),
-                    end: new Date(2022, 6, 14, 15, 0)
-                },
-                {
-                    name: "Lunch Duty",
-                    type: "regular",
-                    start: new Date(2022, 6, 15, 12, 0),
-                    end: new Date(2022, 6, 15, 15, 0)
-                }
-            ]
+            weeklyShifts: {
+                regular: [
+                    {
+                        name: "Lunch Duty",
+                        type: "regular",
+                        start: new Date(2022, 6, 13, 12, 0),
+                        end: new Date(2022, 6, 13, 15, 0)
+                    },
+                    {
+                        name: "Lunch Duty",
+                        type: "regular",
+                        start: new Date(2022, 6, 14, 12, 0),
+                        end: new Date(2022, 6, 14, 15, 0)
+                    },
+                    {
+                        name: "Lunch Duty",
+                        type: "regular",
+                        start: new Date(2022, 6, 15, 12, 0),
+                        end: new Date(2022, 6, 15, 15, 0)
+                    }
+                ],
+                special: []
+            }
         },
         {
             name: "Student B",
-            weeklyShifts: [
-                {
-                    name: "Breakfast Duty",
-                    type: "regular",
-                    start: new Date(2022, 6, 11, 9, 0),
-                    end: new Date(2022, 6, 11, 12, 0)
-                },
-                {
-                    name: "StevensFest",
-                    type: "special",
-                    start: new Date(2022, 6, 12, 9, 0),
-                    end: new Date(2022, 6, 12, 15, 30)
-                },
-                {
-                    name: "UCC Floor Cleaning",
-                    type: "regular",
-                    start: new Date(2022, 6, 15, 12, 0),
-                    end: new Date(2022, 6, 15, 15, 0)
-                }
-            ]
+            weeklyShifts: {
+                regular: [
+                    {
+                        name: "Breakfast Duty",
+                        type: "regular",
+                        start: new Date(2022, 6, 11, 9, 0),
+                        end: new Date(2022, 6, 11, 12, 0)
+                    },
+                    {
+                        name: "UCC Floor Cleaning",
+                        type: "regular",
+                        start: new Date(2022, 6, 15, 12, 0),
+                        end: new Date(2022, 6, 15, 15, 0)
+                    }
+                ],
+                special: [
+                    {
+                        name: "StevensFest",
+                        type: "special",
+                        start: new Date(2022, 6, 12, 9, 0),
+                        end: new Date(2022, 6, 12, 15, 30)
+                    }
+                ]
+            } 
         }
     ];
 }
 
 //NOTE: Will require passed fields as well (the student and the month)
-export async function fetchStudentMonthlyReportInfo() {
+export async function fetchStudentMonthlyReportInfo(id, month) {
     return [
         {
             name: "Student A",
-            weeklyShifts: [
-                {
-                    name: "Lunch Duty",
-                    type: "regular",
-                    start: new Date(2022, 6, 13, 12, 0),
-                    end: new Date(2022, 6, 13, 15, 0)
-                },
-                {
-                    name: "Lunch Duty",
-                    type: "regular",
-                    start: new Date(2022, 6, 14, 12, 0),
-                    end: new Date(2022, 6, 14, 15, 0)
-                },
-                {
-                    name: "Lunch Duty",
-                    type: "regular",
-                    start: new Date(2022, 6, 15, 12, 0),
-                    end: new Date(2022, 6, 15, 15, 0)
-                }
-            ]
+            weeklyShifts: {
+                regular: [
+                    {
+                        name: "Lunch Duty",
+                        type: "regular",
+                        start: new Date(2022, 6, 13, 12, 0),
+                        end: new Date(2022, 6, 13, 15, 0)
+                    },
+                    {
+                        name: "Lunch Duty",
+                        type: "regular",
+                        start: new Date(2022, 6, 14, 12, 0),
+                        end: new Date(2022, 6, 14, 15, 0)
+                    },
+                    {
+                        name: "Lunch Duty",
+                        type: "regular",
+                        start: new Date(2022, 6, 15, 12, 0),
+                        end: new Date(2022, 6, 15, 15, 0)
+                    }
+                ],
+                special: []
+            }
         },
         {
             name: "Student B",
-            weeklyShifts: [
-                {
-                    name: "Breakfast Duty",
-                    type: "regular",
-                    start: new Date(2022, 6, 11, 9, 0),
-                    end: new Date(2022, 6, 11, 12, 0)
-                },
-                {
-                    name: "StevensFest",
-                    type: "special",
-                    start: new Date(2022, 6, 12, 9, 0),
-                    end: new Date(2022, 6, 12, 15, 30)
-                },
-                {
-                    name: "UCC Floor Cleaning",
-                    type: "regular",
-                    start: new Date(2022, 6, 15, 12, 0),
-                    end: new Date(2022, 6, 15, 15, 0)
-                }
-            ]
+            weeklyShifts: {
+                regular: [
+                    {
+                        name: "Breakfast Duty",
+                        type: "regular",
+                        start: new Date(2022, 6, 11, 9, 0),
+                        end: new Date(2022, 6, 11, 12, 0)
+                    },
+                    {
+                        name: "UCC Floor Cleaning",
+                        type: "regular",
+                        start: new Date(2022, 6, 15, 12, 0),
+                        end: new Date(2022, 6, 15, 15, 0)
+                    }
+                ],
+                special: [
+                    {
+                        name: "StevensFest",
+                        type: "special",
+                        start: new Date(2022, 6, 12, 9, 0),
+                        end: new Date(2022, 6, 12, 15, 30)
+                    }
+                ]
+            } 
         }
     ];
+}
+
+//NOTE: It might be a good idea to have shift IDs for weekly shifts in order to distinguish different shifts from each other
+export async function fetchWeeklyShiftsForYear(id, yearId) {
+    return [
+        {
+            name: "Breakfast Duty",
+            day: "Monday",
+            start: new Date(2022, 6, 4, 9, 0), //NOTE: First three fields in the constructor not really relevant, just need the time. 2022, 6, 4 corresponds to July 4th, 2022, the first Monday of the fiscal year
+            end: new Date(2022, 6, 4, 12, 0)
+        },
+        {
+            name: "Lunch Duty",
+            day: "Wednesday",
+            start: new Date(2022, 6, 4, 9, 0),
+            end: new Date(2022, 6, 4, 12, 0)
+        },
+        {
+            name: "UCC Floor Cleaning",
+            day: "Friday",
+            start: new Date(2022, 6, 1, 12, 0),
+            end: new Date(2022, 6, 1, 15, 0)
+        }
+
+    ]
+}
+
+//NOTE: It might be a good idea to have shift IDs for weekly shifts in order to distinguish different shifts from each other
+export async function fetchShiftExceptionsForYear(id, yearId) {
+    return [
+        {
+            shiftName: "Breakfast Duty",
+            date: new Date(2023, 1, 20, 0, 0),
+            reason: "Festival of Love"
+        },
+        {
+            shiftName: "Breakfast Duty",
+            date: new Date(2023, 3, 3, 0, 0),
+            reason: "Building Closed"
+        },
+        {
+            shiftName: "UCC Floor Cleaning",
+            date: new Date(2022, 11, 23, 0, 0),
+            reason: "Building Closed"
+        }
+    ]
+}
+
+//NOTE: It might be a good idea to have shift IDs for weekly shifts in order to distinguish different shifts from each other
+//In fact, we'd need it (unless we want to have shifts be unique in name)
+export async function fetchShiftExceptionsForShift(id, shiftName) {
+    return [
+        {
+            shiftName: "Breakfast Duty",
+            date: new Date(2023, 1, 20, 0, 0),
+            reason: "Festival of Love"
+        },
+        {
+            shiftName: "Breakfast Duty",
+            date: new Date(2023, 3, 3, 0, 0),
+            reason: "Building Closed"
+        }
+    ]
 }

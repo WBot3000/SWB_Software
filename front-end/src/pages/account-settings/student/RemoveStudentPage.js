@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Row, Col, Modal } from "react-bootstrap";
 import PageContainer from "../../../components/PageContainer";
 import DropdownField from "../../../components/DropdownField";
-import { fetchStudentInfo } from "../../../utility/data";
+import { fetchBasicStudentInfo } from "../../../utility/data";
 
 function RemoveStudentPage() {
 
@@ -11,7 +11,7 @@ function RemoveStudentPage() {
 
     useEffect(() => {
         async function setStudentInfoAsync() {
-            let info = await fetchStudentInfo();
+            let info = await fetchBasicStudentInfo();
             setStudentInfo(info);
         }
         setStudentInfoAsync();

@@ -40,6 +40,9 @@ function StudentReportsPage() {
         setStudentInfoAsync();
     }, []);
 
+    const regularShifts = studentInfo?.[selectedStudentIdx]?.weeklyShifts?.regular;
+    const specialShifts = studentInfo?.[selectedStudentIdx]?.weeklyShifts?.special;
+
     function getHoursSummary() {
         return <Container>
             <h3>Select a student to see their working statistics</h3>
@@ -61,8 +64,8 @@ function StudentReportsPage() {
                 <DropdownField
                     items={[...Array(monthlyBudgetInfo.length).keys()]}
                     itemType="Month"
-                    displayItems={monthlyBudgetInfo}
-                    selectedItem={monthlyBudgetInfo[selectedMonthIdx]}
+                    displayItems={monthlyBudgetInfo.map(mbInfo => mbInfo.month)} //Get monthly values from month data
+                    selectedItem={monthlyBudgetInfo[selectedMonthIdx]?.month}
                     setStateFunc={setSelectedMonthIdx}
                     disabled={!selectedYearIdx}
                 />
@@ -80,7 +83,7 @@ function StudentReportsPage() {
         </Row>
         <Row>
             <Col>
-                <StudentShiftDisplay/>
+                <StudentShiftDisplay regular={regularShifts} special={specialShifts}/>
             </Col>
             <Col>
                 {getHoursSummary()}
