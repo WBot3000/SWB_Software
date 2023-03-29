@@ -9,12 +9,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 //Pages
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/homepage/HomePage';
 import ErrorPage from './pages/ErrorPage';
-
-import WeeklyPayrollPage from './pages/WeeklyPayrollPage';
-import WeeklySchedulePage from './pages/WeeklySchedulePage';
-import EmailPage from './pages/EmailPage';
 
 import AccountSettingsPage from './pages/account-settings/AccountSettingsPage';
 import AddStudentPage from './pages/account-settings/student/AddStudentPage';
@@ -36,10 +32,6 @@ const router = createBrowserRouter(
         <Route path='/' element={<HomePage/>}/>
         <Route path='login' element={<LoginPage/>}/>
         <Route path='signup' element={<SignupPage/>}/>
-
-        <Route path='payroll' element={<WeeklyPayrollPage/>}/>
-        <Route path='schedule' element={<WeeklySchedulePage/>}/>
-        <Route path='email' element={<EmailPage/>}/>
 
         <Route path='settings' element={<AccountSettingsPage/>}/>
         <Route path='settings/addstudent' element={<AddStudentPage/>}/>

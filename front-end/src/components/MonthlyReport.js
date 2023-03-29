@@ -74,7 +74,7 @@ function MonthlyReport(props) {
                 <p>Total Hours: {props.totalHours ?? 0}</p>
             </Col>
             <Col>
-                <h2 className="mb-2">Shift Exceptions This Month</h2>
+                <h2 className="mb-2">Shift Exceptions For The Month</h2>
                 <ul>
                     {props.exceptions?.map(exception => <li>
                         {`${exception.shiftName} (${exception.reason}): ${toMonthDay(exception.date)}`}

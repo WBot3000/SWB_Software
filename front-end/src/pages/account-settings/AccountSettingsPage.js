@@ -6,26 +6,8 @@ import InlineTextField from "../../components/InlineTextField";
 import NavButton from "../../components/NavButton";
 
 import { toMonetaryValue } from "../../utility/formatting";
+import { validMonetaryValue } from "../../utility/validation";
 import { useYearlyInfo } from "../../utility/useYearlyInfo";
-
-function validateMonetaryField(field) {
-    let numField = Number(field)
-    if(Number.isNaN(field)) {
-        console.log("Monetary value must be a number");
-    }
-    else if(numField < 0) {
-        console.log("Monetary field cannot be negative");
-    }
-    else { //Checks for too many decimals
-        let decimalLocation = field.indexOf(".");
-        if(decimalLocation != -1 && field.length - decimalLocation - 1 > 2) {
-            console.log("Monetary values should have a maximum value of two decimal places.")
-        }
-        else {
-            console.log("Monetary value is good!")
-        }
-    }
-}
 
 function AccountSettingsPage() {
     //State
@@ -37,21 +19,40 @@ function AccountSettingsPage() {
 
     //Fields
     const [budgetField, setBudgetField] = useState(null);
+    const [budgetUpdatedMsg, setBudgetUpdatedMsg] = useState("");
+
     const [payrateField, setPayrateField] = useState(null);
+    const [payrateUpdatedMsg, setPayrateUpdatedMsg] = useState("");
 
     //Functions
-    //TODO: Add DB functions
+    //TODO: Add DB functions (as well as updating data in memory)
     function alterBudgetForSelectedYear() {
-        validateMonetaryField(budgetField);
-        // let cloneData = []
-        // for(let info in yearlyInfo) {
-        //     cloneData.push({...info})
-        // }
-        // cloneData[selectedYearIdx].budget = budgetField
+        try {
+            validMonetaryValue(budgetField, "Budget");
+            setBudgetUpdatedMsg("Budget successfully updated!");
+        }
+        catch(err) {
+            console.log(err)
+            setBudgetUpdatedMsg(err);
+        }
     }
 
     function alterPayrateForSelectedYear() {
-        validateMonetaryField(payrateField);
+        try {
+            validMonetaryValue(payrateField, "Payrate");
+            setPayrateUpdatedMsg("Payrate successfully updated!");
+        }
+        catch(err) {
+            setPayrateUpdatedMsg(err);
+        }
+    }
+
+    function switchYear(switchIdx) {
+        setSelectedYearIdx(switchIdx);
+        setBudgetField("");
+        setBudgetUpdatedMsg("");
+        setPayrateField("");
+        setPayrateUpdatedMsg("");
     }
 
     return <PageContainer pageName="Account Settings">
@@ -62,29 +63,39 @@ function AccountSettingsPage() {
                     itemType="Year"
                     displayItems={yearlyInfo.map(info => info.year)}
                     selectedItem={yearlyInfo[selectedYearIdx]?.year}
-                    setStateFunc={setSelectedYearIdx}
+                    setStateFunc={switchYear}
                 />
             </Col>
         </Row>
         <Row className="mb-4">
-            <p>Budget: {selectedYearIdx ? `${toMonetaryValue(yearlyInfo[selectedYearIdx].budget)}` : "Select a year to see the budget"}</p>
-            <InlineTextField label="Set New Budget" controlId="settings.budget"
-                setStateFunc={setBudgetField}
-                type="number"
-                value={budgetField}
-                disabled={!selectedYearIdx}
-                submittable
-                submitFunc={alterBudgetForSelectedYear} buttonLabel="Set New Budget"/>
+            <Col>
+                <p>Budget: {selectedYearIdx ? `${toMonetaryValue(yearlyInfo[selectedYearIdx].budget)}` : "Select a year to see the budget"}</p>
+                <InlineTextField label="Set New Budget" controlId="settings.budget"
+                    setStateFunc={setBudgetField}
+                    type="number"
+                    value={budgetField}
+                    disabled={!selectedYearIdx}
+                    submittable
+                    submitFunc={alterBudgetForSelectedYear} buttonLabel="Set New Budget"/>
+            </Col>
+            <Col>
+                <p>{budgetUpdatedMsg}</p>
+            </Col>
         </Row>
         <Row className="mb-4">
+            <Col>
             <p>Payrate: {selectedYearIdx ? `${toMonetaryValue(yearlyInfo[selectedYearIdx].payrate)}/hour` : "Select a year to see the payrate"}</p>
             <InlineTextField label="Set New Payrate" controlId="settings.payrate"
                 setStateFunc={setPayrateField}
                 type="number"
                 value={payrateField}
-                disabled={!payrateField}
+                disabled={!selectedYearIdx}
                 submittable
                 submitFunc={alterPayrateForSelectedYear} buttonLabel="Set New Payrate"/>
+            </Col>
+            <Col>
+                <p>{payrateUpdatedMsg}</p>
+            </Col>
         </Row>
         <Row className="mb-4">
             <h2>Student Workers</h2>
@@ -103,8 +114,8 @@ function AccountSettingsPage() {
             <Stack direction="horizontal" gap={4}>
                 <NavButton to="createshift">Create New Shift</NavButton>
                 <NavButton to="deleteshift">Delete Shift</NavButton>
-                <NavButton to="adddayexception">Add Day Exception</NavButton>
-                <NavButton to="removedayexception">Remove Day Exception</NavButton>
+                <NavButton to="addshiftexception">Add Shift Exception</NavButton>
+                <NavButton to="removeshiftexception">Remove Shift Exception</NavButton>
             </Stack>
         </Row>
     </PageContainer>

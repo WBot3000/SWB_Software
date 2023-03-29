@@ -5,7 +5,7 @@ import MonthlyReport from "../../components/MonthlyReport";
 
 import { useState, useEffect } from "react";
 import { fetchMonthlyReportInfo } from "../../utility/data";
-import { months } from "../../utility/formatting";
+import { months, standardToFiscalMonthIdx } from "../../utility/formatting";
 import { useYearlyInfo } from "../../utility/useYearlyInfo";
 import { useShiftExceptionsForYear } from "../../utility/useShiftExceptionsForYear";
 
@@ -32,10 +32,10 @@ function MonthlyReportsPage() {
     }, [selectedYearIdx])
 
     //Index of the selected monthly budget data
-    const [selectedMonthIdx, setSelectedMonthIdx] = useState(null)
+    const [selectedMonthIdx, setSelectedMonthIdx] = useState(null);
 
     const exceptionsForMonth = shiftExceptionsForYear?.filter(exception => {
-        return months[(exception.date.getMonth() + 6) % 12] == months[selectedMonthIdx];
+        return months[standardToFiscalMonthIdx(exception.date.getMonth())] == months[selectedMonthIdx];
     });
 
 

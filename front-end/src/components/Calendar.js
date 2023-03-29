@@ -3,7 +3,7 @@ import LeftArrow from "../icons/caret-left-fill.svg"
 import RightArrow from "../icons/caret-right-fill.svg"
 
 import { useState, useEffect } from "react"
-import { months, lastDaysOfMonths, toMonthYear } from "../utility/formatting.js"
+import { months, lastDaysOfMonths, toMonthYear, standardToFiscalMonthIdx } from "../utility/formatting.js"
 
 //Needed to fix date key issues
 import { v4 as uuidv4 } from "uuid";
@@ -36,13 +36,13 @@ function Calendar() {
 
     function createWeekData(baseDate) {
         //Because our months start at July
-        let baseMonth = months[(baseDate.getMonth() + 6) % 12];
+        let baseMonth = months[standardToFiscalMonthIdx(baseDate.getMonth())];
         let baseYear = baseDate.getFullYear();
         
 
         //Get the last day of the month
         //NOTE: This is NOT a date object (since we don't need weekday info), this is just a number
-        let lastDayDate = lastDaysOfMonths[(baseDate.getMonth() + 6) % 12];
+        let lastDayDate = lastDaysOfMonths[standardToFiscalMonthIdx(baseDate.getMonth())];
         //Special logic for February leap years
         if(baseMonth == "February" && (baseYear % 4 == 0 && (baseYear % 100 != 0 || baseYear % 400 == 0))) {
             lastDayDate = 29

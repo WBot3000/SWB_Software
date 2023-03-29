@@ -2,21 +2,33 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import InlineTextField from "../../../components/InlineTextField";
 import PageContainer from "../../../components/PageContainer";
 import { useState } from "react";
+import { validEmail, validStudentID } from "../../../utility/validation";
 
 function AddStudentPage() {
 
-    const [idField, setIDField] = useState(null);
-    const [nameField, setNameField] = useState(null);
-    const [emailField, setEmailField] = useState(null);
+    const [idField, setIDField] = useState("");
+    const [nameField, setNameField] = useState("");
+    const [emailField, setEmailField] = useState("");
 
-    const [addedMsg, setAddedMsg] = useState(null);
+    const [addedMsg, setAddedMsg] = useState("");
 
     function addStudentToAccount(e) {
         e.preventDefault();
+        try {
+            validStudentID(idField);
+            if(nameField.trim().length == 0) {
+                throw "Student's name cannot be empty!";
+            }
+            validEmail(emailField);
+            //TODO: Check to see if the student ID exists within the account already
+            setAddedMsg("Student successfully added")
+        }
+        catch(err) {
+            setAddedMsg(err);
+        }
         console.log("ID: " + idField);
         console.log("Name: " + nameField);
         console.log("Email: " + emailField);
-        setAddedMsg("Student successfully added");
     }
 
     return <PageContainer pageName="Add Student Worker">

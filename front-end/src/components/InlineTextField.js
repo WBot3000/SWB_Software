@@ -7,6 +7,7 @@ function InlineTextField(props) {
             <Col xs="auto">
                 <Form.Control 
                     type={props.type ?? "text"}
+                    value={props.value}
                     onChange={props.setStateFunc ? (e) => {props.setStateFunc(e.target.value)} : () => {}}
                     disabled={props.disabled}
                 />

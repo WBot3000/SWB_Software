@@ -2,6 +2,7 @@ import {Container, Row, Col, Form, Button} from "react-bootstrap"
 import TextFormField from "../components/TextFormField";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { validPassword, validUsername } from "../utility/validation";
 
 
 function SignupPage() {
@@ -10,12 +11,29 @@ function SignupPage() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const [signupError, setSignupError] = useState("")
+
     //TODO: Replace this with actual function
-    function submitSignup() {
-        console.log(`Username: ${username}`)
-        console.log(`Password: ${password}`)
-        console.log(`Username: ${confirmPassword}`)
-        console.log(password == confirmPassword)
+    function submitSignup(e) {
+        e.preventDefault();
+        try {
+            validUsername(username);
+            validPassword(password);
+            if(password != confirmPassword) {
+                throw "Error: Passwords don't match!";
+            }
+
+            //TODO: This will be replaced with DB call
+            console.log(`Username: ${username}`)
+            console.log(`Password: ${password}`)
+            console.log(`Username: ${confirmPassword}`)
+            //
+
+            setSignupError("Signup successful")
+        }
+        catch(err) {
+            setSignupError(err);
+        }
     }
 
     return <Container>
@@ -26,12 +44,17 @@ function SignupPage() {
                 <h2 className="mt-3 mb-5 mx-5">Signup</h2>
                 <TextFormField label="Username" controlId="login.username"
                     setStateFunc={setUsername}
-                    bullets={["Username Requirement 1", "Username Requirement 2"]}
+                    bullets={["Must be at least 4 characters long", 
+                    "Must only consist of alphanumeric (A-Z, a-z, 0-9) characters"]}
                 />
 
                 <TextFormField label="Password" controlId="login.password"
                     setStateFunc={setPassword}
-                    bullets={["Password Requirement 1", "Password Requirement 2"]}
+                    bullets={["Must be at least 6 characters long", 
+                    "Must have an uppercase character",
+                    "Must have a number",
+                    "Must have a special character (`!@#$%^&*()_+-=[]{};':\"\\|,.<>/?~)",
+                    "Cannot have any spaces"]}
                     type="password"
                 />
 
@@ -41,9 +64,11 @@ function SignupPage() {
                     type="password"
                 />
 
+                <p className="text-center font-weight-bold">{signupError}</p>
+
 
                 <Container className="text-center">
-                    <Button onClick={submitSignup} className="mb-4 w-25 p-2" variant="primary" type="submit">
+                    <Button onClick={(e) => {submitSignup(e)}} className="mb-4 w-25 p-2" variant="primary" type="submit">
                         Create Account
                     </Button>
 

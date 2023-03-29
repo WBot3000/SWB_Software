@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useYearlyInfo } from "../../../utility/useYearlyInfo";
 import { useWindowSize } from "../../../utility/useWindowSize";
 import { breakpoints, daysOfWeek, months } from "../../../utility/formatting";
+import { validFiscalYear, validTime } from "../../../utility/validation";
 
 function CreateShiftPage() {
     const [shiftNameField, setShiftNameField] = useState("");
@@ -30,6 +31,8 @@ function CreateShiftPage() {
 
     const [selectedMonthIdx, setSelectedMonthIdx] = useState(null);
     const [selectedDay, setSelectedDay] = useState(null);
+
+    const [addedMsg, setAddedMsg] = useState("");
 
     const {width, height} = useWindowSize();
 
@@ -61,14 +64,29 @@ function CreateShiftPage() {
     }
 
     //TODO: Add DB functionality and input validation
-    function submitShift() {
-        console.log(`${shiftNameField}: ${startHour}:${startMinute} ${startTimeOfDay} - ${finishHour}:${finishMinute} ${finishTimeOfDay}`);
-        if(shiftType == "weekly") {
-            console.log(`${dayOfWeek}s of ${yearlyInfo[selectedYearIdx].year}`)
+    function submitShift(e) {
+        e.preventDefault();
+        try {
+            validFiscalYear(yearlyInfo[selectedYearIdx].year);
+            if(shiftNameField.trim().length == 0) {
+                throw "Shift must have a name!";
+            }
+            validTime(startHour, startMinute, startTimeOfDay, "Start Time");
+            validTime(finishHour, finishMinute, finishTimeOfDay, "Finish Time");
+
         }
-        if(shiftType == "singleday") {
-            console.log(`${months[selectedMonthIdx]} ${selectedDay} of ${yearlyInfo[selectedYearIdx].year}`)
+        catch(err) {
+            setAddedMsg(err);
         }
+
+
+        // console.log(`${shiftNameField}: ${startHour}:${startMinute} ${startTimeOfDay} - ${finishHour}:${finishMinute} ${finishTimeOfDay}`);
+        // if(shiftType == "weekly") {
+        //     console.log(`${dayOfWeek}s of ${yearlyInfo[selectedYearIdx].year}`)
+        // }
+        // if(shiftType == "singleday") {
+        //     console.log(`${months[selectedMonthIdx]} ${selectedDay} of ${yearlyInfo[selectedYearIdx].year}`)
+        // }
     }
 
     //TODO: Add year to shift page
@@ -104,7 +122,10 @@ function CreateShiftPage() {
         <Row>
             {getAdditionalSettings()}
         </Row>
-        {shiftType && <Button onClick={submitShift}>Create Shift</Button>}
+        <Row>
+            <p className="text-center">{addedMsg}</p>
+        </Row>
+        {shiftType && <Button onClick={(e) => {submitShift(e)}}>Create Shift</Button>}
     </PageContainer>
 }
 export default CreateShiftPage;
