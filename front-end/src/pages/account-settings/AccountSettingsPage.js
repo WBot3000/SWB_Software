@@ -8,6 +8,7 @@ import NavButton from "../../components/NavButton";
 import { toMonetaryValue } from "../../utility/formatting";
 import { validMonetaryValue } from "../../utility/validation";
 import { useYearlyInfo } from "../../utility/useYearlyInfo";
+import { setBudgetDB, setPayrateDB } from "../../utility/data";
 
 function AccountSettingsPage() {
     //State
@@ -29,10 +30,11 @@ function AccountSettingsPage() {
     function alterBudgetForSelectedYear() {
         try {
             validMonetaryValue(budgetField, "Budget");
+            //TODO: Fill out
+            setBudgetDB();
             setBudgetUpdatedMsg("Budget successfully updated!");
         }
         catch(err) {
-            console.log(err)
             setBudgetUpdatedMsg(err);
         }
     }
@@ -40,6 +42,8 @@ function AccountSettingsPage() {
     function alterPayrateForSelectedYear() {
         try {
             validMonetaryValue(payrateField, "Payrate");
+            //TODO: Fill out
+            setPayrateDB();
             setPayrateUpdatedMsg("Payrate successfully updated!");
         }
         catch(err) {

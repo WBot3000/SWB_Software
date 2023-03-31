@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { Button, Row, Col, Modal } from "react-bootstrap";
 import PageContainer from "../../../components/PageContainer";
 import DropdownField from "../../../components/DropdownField";
-import { fetchBasicStudentInfo } from "../../../utility/data";
+import { deleteStudentDB, fetchBasicStudentInfo } from "../../../utility/data";
 
 function RemoveStudentPage() {
 
     //Students that belong to the account
     const [studentInfo, setStudentInfo] = useState([]);
+    const [deletedMsg, setDeletedMsg] = useState("")
 
     useEffect(() => {
         async function setStudentInfoAsync() {
@@ -23,16 +24,24 @@ function RemoveStudentPage() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     function deleteStudent() {
-        //Copy all students to a new array except for the one that needs to be deleted
-        let newStudentData = [];
-        for(let i = 0; i < studentInfo.length; i++) {
-            if(i != studentToDeleteIdx) {
-                newStudentData.push(studentInfo[i]);
+        try {
+            //TODO: Fill out
+            deleteStudentDB();
+            //Copy all students to a new array except for the one that needs to be deleted
+            let newStudentData = [];
+            for(let i = 0; i < studentInfo.length; i++) {
+                if(i != studentToDeleteIdx) {
+                    newStudentData.push(studentInfo[i]);
+                }
             }
+            setStudentInfo(newStudentData);
+            setStudentToDeleteIdx(null);
+            setDeletedMsg("Student successfully deleted!");
+            setModalIsOpen(false);
         }
-        setStudentInfo(newStudentData);
-        setStudentToDeleteIdx(null);
-        setModalIsOpen(false);
+        catch(err) {
+            setDeletedMsg(err);
+        }
     }
 
     console.log(studentInfo)
@@ -47,6 +56,9 @@ function RemoveStudentPage() {
                     selectedItem={studentInfo[studentToDeleteIdx]?.name}
                     setStateFunc={setStudentToDeleteIdx}
                 />
+            </Col>
+            <Col>
+                <p>{deletedMsg}</p>
             </Col>
         </Row>
         <Row>
