@@ -451,7 +451,7 @@ export const getScheduleShiftList = () => {
     const getRandomDate = () => {
         return faker.date.between('2023-01-01T00:00:00.000Z', new Date())
     }
-
+    
     return [
         {
             name: 'shift 1',

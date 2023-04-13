@@ -1,3 +1,5 @@
+import moment from "moment-timezone";
+
 /*
     This file contains data and functions that help with formatting the data on the front end.
  */
@@ -65,4 +67,13 @@ export function toMonthYear(date) {
     let month = months[standardToFiscalMonthIdx(date.getMonth())];
     let dateYear = date.getFullYear();
     return month + " " + dateYear
+}
+
+const date_format = 'M/D/YYYY'
+export function renderWeekRange(selectWeeks) {
+    if (selectWeeks && selectWeeks.length > 0) {
+        return `${moment(selectWeeks[0]).format(date_format)} - ${moment(selectWeeks[6]).format(date_format)}`
+    } else {
+        return "Select a Week"
+    }
 }

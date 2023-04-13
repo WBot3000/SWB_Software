@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Row, Col, Modal } from "react-bootstrap";
+import { Row, Col, Modal } from "react-bootstrap";
 import PageContainer from "../../../components/PageContainer";
 import { Table, Form, Input, Popconfirm, DatePicker, Button } from 'antd';
-
-import { useState, useEffect } from "react";
-
 import { getStudentList } from '../../../utility/data.js'
 
 const { RangePicker } = DatePicker
@@ -45,7 +42,8 @@ function RemoveStudentPage() {
             }
         },
     ])
-    const [options, setOptions] = useState()
+
+    //const [options, setOptions] = useState()
     const [tablData, setTableDate] = useState(getStudentList())
 
     useEffect(() => {

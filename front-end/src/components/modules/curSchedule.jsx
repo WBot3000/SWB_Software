@@ -1,7 +1,7 @@
 import './curSchedule.css'
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'antd';
-import moment from "moment-timezone";
+import { renderWeekRange } from '../../utility/formatting';
 import "moment/locale/en-gb"; // 设置语言为英文
 
 const faker = require('faker');
@@ -39,19 +39,6 @@ const CurSchedule = (props) => {
         return data
     }
 
-    const renderWeekRange = () => {
-        let format = 'D/M/YYYY'
-        if (props.selectWeeks && props.selectWeeks.length > 0) {
-            return <>
-                {moment(props.selectWeeks[0]).format(format)} - {moment(props.selectWeeks[6]).format(format)}
-            </>
-        } else {
-            return <>
-                unselected
-            </>
-        }
-    }
-
     useEffect(() => {
         setScheduleList(getData())
     }, [props.visible])
@@ -67,7 +54,7 @@ const CurSchedule = (props) => {
         >
             {/* {content} */}
             <div className='schedule-wrap'>
-                <h2>{renderWeekRange()}</h2>
+                <h2>{renderWeekRange(props.selectWeeks)}</h2>
                 {
                     scheduleList.map((item, index) => <div className="item" key={index}>
                         <div className="title">

@@ -112,9 +112,9 @@ function AccountSettingsPage() {
         </Row>
         <Row>
             <Stack direction="horizontal" gap={4}>
-                <Link to="createshift"><Button>Create New Shift</Button></Link>
-                <Link to="deleteshift"><Button>Delete Shift</Button></Link>
-                <Link to="addshiftexception"><Button>Edit Shift Exception</Button></Link>
+                <NavButton to="createshift">Create New Shift</NavButton>
+                <NavButton to="deleteshift">Delete Shift</NavButton>
+                <NavButton to="addshiftexception">Edit Shift Exception</NavButton>
                 {/* <Link to="removeshiftexception"><Button>Remove Shift Exception</Button></Link> */}
             </Stack>
         </Row>
