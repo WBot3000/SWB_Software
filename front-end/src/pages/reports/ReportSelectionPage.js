@@ -1,13 +1,13 @@
 import { Col, Button, Stack } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import NavButton from "../../components/NavButton";
 import PageContainer from "../../components/PageContainer";
 
 function ReportSelectionPage() {
     return <PageContainer pageName="Reports">
         <Stack gap={5}>
-            <Col><Link to="monthly"><Button>View Monthly Reports</Button></Link></Col>
-            <Col><Link to="yearly"><Button>View Fiscal Year Reports</Button></Link></Col>
-            <Col><Link to="students"><Button>View Student Reports</Button></Link></Col>
+            <Col><NavButton to="monthly">View Monthly Reports</NavButton></Col>
+            <Col><NavButton to="yearly">View Fiscal Year Reports</NavButton></Col>
+            <Col><NavButton to="students">View Student Reports</NavButton></Col>
         </Stack>
     </PageContainer>
 

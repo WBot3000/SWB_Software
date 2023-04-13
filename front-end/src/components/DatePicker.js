@@ -12,7 +12,6 @@ function DatePicker(props) {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [displayDate, setDisplayDate] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
 
     //Index of the selected month
     const [storedMonthIdx, setStoredMonthIdx] = useState(null);
@@ -52,6 +51,7 @@ function DatePicker(props) {
         if(props.setDayFunc) {
             props.setDayFunc(storedDay);
         }
+        setDisplayDate(months[storedMonthIdx] + " " + storedDay)
         setModalIsOpen(false);
     }
 
@@ -99,9 +99,6 @@ function DatePicker(props) {
                     <Col>
                         <Button onClick={setDate}>Select Date</Button>
                     </Col>
-                </Row>
-                <Row>
-                    <p>{errorMsg}</p>
                 </Row>
             </Modal.Body>
         </Modal>

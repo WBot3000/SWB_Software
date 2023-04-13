@@ -1,22 +1,15 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { fetchYearlyInfo, fetchMonthlyBudgetInfo, fetchMonthlyStudentInfo } from "../../utility/data";
+import { fetchMonthlyReportInfo, fetchStudentMonthlyReportInfo } from "../../utility/data";
 import DropdownField from "../../components/DropdownField";
 import PageContainer from "../../components/PageContainer";
 import StudentShiftDisplay from "../../components/StudentShiftDisplay";
+import { useYearlyInfo } from "../../utility/useYearlyInfo";
 
 function StudentReportsPage() {
     //State
     //Year data, will be gotten from the database
-    const [yearlyInfo, setYearlyInfo] = useState([]);
-
-    useEffect(() => {
-        async function setYearlyInfoAsync() {
-            let info = await fetchYearlyInfo();
-            setYearlyInfo(info);
-        }
-        setYearlyInfoAsync();
-    }, [])
+    const yearlyInfo = useYearlyInfo();
 
     //Index of the selected year data
     const [selectedYearIdx, setSelectedYearIdx] = useState(null);
@@ -26,7 +19,7 @@ function StudentReportsPage() {
 
     useEffect(() => {
         async function setMonthlyBudgetInfoAsync() {
-            let info = await fetchMonthlyBudgetInfo();
+            let info = await fetchMonthlyReportInfo();
             setMonthlyBudgetInfo(info);
         }
         setMonthlyBudgetInfoAsync();
@@ -41,11 +34,14 @@ function StudentReportsPage() {
 
     useEffect(() => {
         async function setStudentInfoAsync() {
-            let info = await fetchMonthlyStudentInfo();
+            let info = await fetchStudentMonthlyReportInfo();
             setStudentInfo(info);
         }
         setStudentInfoAsync();
     }, []);
+
+    const regularShifts = studentInfo?.[selectedStudentIdx]?.weeklyShifts?.regular;
+    const specialShifts = studentInfo?.[selectedStudentIdx]?.weeklyShifts?.special;
 
     function getHoursSummary() {
         return <Container>
@@ -68,8 +64,8 @@ function StudentReportsPage() {
                 <DropdownField
                     items={[...Array(monthlyBudgetInfo.length).keys()]}
                     itemType="Month"
-                    displayItems={monthlyBudgetInfo}
-                    selectedItem={monthlyBudgetInfo[selectedMonthIdx]}
+                    displayItems={monthlyBudgetInfo.map(mbInfo => mbInfo.month)} //Get monthly values from month data
+                    selectedItem={monthlyBudgetInfo[selectedMonthIdx]?.month}
                     setStateFunc={setSelectedMonthIdx}
                     disabled={!selectedYearIdx}
                 />
@@ -87,7 +83,7 @@ function StudentReportsPage() {
         </Row>
         <Row>
             <Col>
-                <StudentShiftDisplay/>
+                <StudentShiftDisplay regular={regularShifts} special={specialShifts}/>
             </Col>
             <Col>
                 {getHoursSummary()}
