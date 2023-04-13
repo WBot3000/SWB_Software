@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
+// antd 
+import 'antd/dist/reset.css';
+
 //Pages
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -52,6 +55,7 @@ const router = createBrowserRouter(
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <RouterProvider router={router}/>

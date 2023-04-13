@@ -4,6 +4,9 @@
  */
 
 import axios from "axios";
+import moment from 'moment'
+const faker = require('faker');
+
 
 //Currently these are all like mock functions, will be updated once the backend is set up. Right now they just return placeholder data.
 //NOTE: Will require weekly identifier
@@ -231,6 +234,7 @@ export async function fetchBasicStudentInfo() {
     ];
 }
 
+
 //NOTE: Will probably require some week identifier to be passed when made to communicate with backend
 export async function fetchStudentWeeklyScheduleInfo(id, weekStart, weekEnd) {
     return [
@@ -410,4 +414,60 @@ export async function fetchShiftExceptionsForShift(id, shiftName) {
             reason: "Building Closed"
         }
     ]
+}
+
+//NOTE: student work list
+export async function getStudentWorkListById(id) {
+    return [
+
+    ];
+}
+
+//NOTE: student list
+export const getStudentList = () => {
+    const getRandomDate = () => {
+        return faker.date.between('2023-01-01T00:00:00.000Z', new Date())
+    }
+
+    return [
+        {
+            name: 'Student A',
+            id: 'Student A',
+            createDate: moment(getRandomDate()).format('D/M/YYYY HH:mm'),
+            scheduleNum: 2,
+            email: faker.internet.email()
+        },
+        {
+            name: 'Student B',
+            id: 'Student B',
+            createDate: moment(getRandomDate()).format('D/M/YYYY HH:mm'),
+            scheduleNum: 5,
+            email: faker.internet.email()
+        },
+    ];
+}
+//NOTE: Schedule Shift list
+export const getScheduleShiftList = () => {
+    const getRandomDate = () => {
+        return faker.date.between('2023-01-01T00:00:00.000Z', new Date())
+    }
+
+    return [
+        {
+            name: 'shift 1',
+            id: 'shift 1',
+            startTime: moment(getRandomDate()).format('D/M/YYYY HH:mm'),
+            finishTime: moment(getRandomDate()).format('D/M/YYYY HH:mm'),
+            createDate: moment(getRandomDate()).format('D/M/YYYY HH:mm'),
+            type: 'Weekly'
+        },
+        {
+            name: 'shift 2',
+            id: 'shift 2',
+            startTime: moment(getRandomDate()).format('D/M/YYYY HH:mm'),
+            finishTime: moment(getRandomDate()).format('D/M/YYYY HH:mm'),
+            createDate: moment(getRandomDate()).format('D/M/YYYY HH:mm'),
+            type: 'Single Day'
+        },
+    ];
 }

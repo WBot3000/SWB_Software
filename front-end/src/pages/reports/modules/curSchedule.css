@@ -1,0 +1,27 @@
+.cur-schedule{
+    width: 50% !important;
+}
+.cur-schedule .schedule-wrap{
+
+}
+
+.cur-schedule .schedule-wrap .item + .item{
+    margin-top: 10px;
+}
+.cur-schedule .schedule-wrap .title{
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.cur-schedule .schedule-wrap .cont{
+    text-indent: 20px;
+}
+
+.cur-schedule .schedule-wrap .cont .schedule-item{
+    display: flex;
+}
+.cur-schedule .schedule-wrap .cont .schedule-item .change-person{
+    font-style: italic;
+    color: blue;
+    cursor: pointer;
+}

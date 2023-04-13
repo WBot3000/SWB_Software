@@ -1,4 +1,4 @@
-import {Button, Row, Col, Stack} from "react-bootstrap"
+import { Button, Row, Col, Stack } from "react-bootstrap"
 import { useState, useEffect } from "react";
 import PageContainer from "../../components/PageContainer";
 import DropdownField from "../../components/DropdownField";
@@ -112,10 +112,10 @@ function AccountSettingsPage() {
         </Row>
         <Row>
             <Stack direction="horizontal" gap={4}>
-                <NavButton to="createshift">Create New Shift</NavButton>
-                <NavButton to="deleteshift">Delete Shift</NavButton>
-                <NavButton to="addshiftexception">Add Shift Exception</NavButton>
-                <NavButton to="removeshiftexception">Remove Shift Exception</NavButton>
+                <Link to="createshift"><Button>Create New Shift</Button></Link>
+                <Link to="deleteshift"><Button>Delete Shift</Button></Link>
+                <Link to="addshiftexception"><Button>Edit Shift Exception</Button></Link>
+                {/* <Link to="removeshiftexception"><Button>Remove Shift Exception</Button></Link> */}
             </Stack>
         </Row>
     </PageContainer>

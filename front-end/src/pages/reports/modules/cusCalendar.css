@@ -1,0 +1,46 @@
+.calendar {
+    width: 600px;
+}
+
+.calendar .header {
+    display: flex;
+    /* align-items: center; */
+}
+
+.calendar .header h2 {
+    flex: 0 0 300px;
+    text-align: center;
+}
+
+.calendar .weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar .weekdays div {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.calendar .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 20px 0px;
+}
+
+.calendar .days .day {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.calendar .current-month {
+    background-color: #c3c0d5;
+}
+
+.highlighted-week {
+    background-color: #5be1e5 !important;
+}
