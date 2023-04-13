@@ -55,7 +55,7 @@ function DeleteShiftPage() {
                 layout="inline"
             >
                 <Form.Item label="Shift Name:" >
-                    <Input placeholder="input shift name" />
+                    <Input placeholder="Input shift name" />
                 </Form.Item>
                 <Form.Item label="Date:" >
                     <RangePicker />

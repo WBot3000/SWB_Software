@@ -56,7 +56,7 @@ function RemoveStudentPage() {
                 layout="inline"
             >
                 <Form.Item label="Student:" >
-                    <Input placeholder="input student name" />
+                    <Input placeholder="Input student name" />
                 </Form.Item>
                 <Form.Item label="Date:" >
                     <RangePicker />

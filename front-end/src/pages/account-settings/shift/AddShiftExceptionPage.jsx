@@ -2,6 +2,7 @@ import PageContainer from "../../../components/PageContainer";
 import { Form, Popconfirm, Button, Select, DatePicker } from 'antd'
 import { useEffect, useState } from 'react'
 
+
 const AddShiftExceptionPage = () => {
 
     const [curShift, setCurShift] = useState('Shift 1')
@@ -42,7 +43,8 @@ const AddShiftExceptionPage = () => {
                         <div>
                             {exceptions[key].exceptList.map((item, index) => (
                                 <div>
-                                    <div key={index}>
+                                    {console.log(item)}
+                                    <div key={item + index}>
                                         <DatePicker />
                                         &nbsp;
                                         <Button danger onClick={() => removeDay(key, index)}> Remove </Button>
