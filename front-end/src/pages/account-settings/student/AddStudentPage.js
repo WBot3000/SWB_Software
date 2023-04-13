@@ -3,6 +3,7 @@ import InlineTextField from "../../../components/InlineTextField";
 import PageContainer from "../../../components/PageContainer";
 import { useState } from "react";
 import { validEmail, validStudentID } from "../../../utility/validation";
+import { addNewStudentDB } from "../../../utility/data";
 
 function AddStudentPage() {
 
@@ -20,7 +21,8 @@ function AddStudentPage() {
                 throw "Student's name cannot be empty!";
             }
             validEmail(emailField);
-            //TODO: Check to see if the student ID exists within the account already
+            //TODO: Fill out, Check to see if the student ID exists within the account already (this will be done in the DB function)
+            addNewStudentDB();
             setAddedMsg("Student successfully added")
         }
         catch(err) {

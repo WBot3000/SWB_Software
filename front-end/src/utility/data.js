@@ -9,6 +9,12 @@ const faker = require('faker');
 
 
 //Currently these are all like mock functions, will be updated once the backend is set up. Right now they just return placeholder data.
+
+/*
+    Fetching Functions
+    These functions are in charge of making requests to the database that receive data based off of parameters.
+*/
+
 //NOTE: Will require weekly identifier
 export async function fetchWeeklySchedule() {
     return
@@ -470,4 +476,55 @@ export const getScheduleShiftList = () => {
             type: 'Single Day'
         },
     ];
+
+/*
+
+    Database Update Functions
+    These functions are in charge of updating the database with new data
+
+    NOTE: Ask backend team to give EVERYTHING an id of some sort (shifts and shift exceptions mainly)
+*/
+
+export async function addNewUserAccountDB(username, password) {
+
+}
+
+export async function setBudgetDB(accID, yearID, newBudget) {
+
+}
+
+export async function setPayrateDB(accID, yearID, newPayrate) {
+
+}
+
+export async function addNewStudentDB(accID, studentID, studentName, studentEmail) {
+
+}
+
+export async function deleteStudentDB(accID, studentID) {
+
+}
+
+export async function addWeeklyShiftDB(accID, shiftName, startTime, endTime, yearID, weekday) {
+
+}
+
+export async function addSingleDayShiftDB(accID, shiftName, startTime, endTime, date) {
+
+}
+
+export async function removeWeeklyShiftDB(accID, shiftName) {
+
+}
+
+export async function removeSingleDayShiftDB(accID, shiftName) {
+
+}
+
+export async function addShiftExceptionDB(accID, shiftName, date, reason) {
+
+}
+
+export async function removeShiftExceptionDB(accID, shiftName, date, reason) {
+
 }

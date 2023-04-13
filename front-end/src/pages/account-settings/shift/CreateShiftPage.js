@@ -9,7 +9,8 @@ import { useState } from "react";
 import { useYearlyInfo } from "../../../utility/useYearlyInfo";
 import { useWindowSize } from "../../../utility/useWindowSize";
 import { breakpoints, daysOfWeek, months } from "../../../utility/formatting";
-import { validFiscalYear, validTime } from "../../../utility/validation";
+import { validDate, validFiscalYear, validTime } from "../../../utility/validation";
+import { addSingleDayShiftDB, addWeeklyShiftDB } from "../../../utility/data";
 
 function CreateShiftPage() {
     const [shiftNameField, setShiftNameField] = useState("");
@@ -73,20 +74,24 @@ function CreateShiftPage() {
             }
             validTime(startHour, startMinute, startTimeOfDay, "Start Time");
             validTime(finishHour, finishMinute, finishTimeOfDay, "Finish Time");
-
+            //TODO: Fill out
+            if(shiftType == "weekly") {
+                //Invalid weekday
+                if(!daysOfWeek.includes(dayOfWeek)) {
+                    throw "Invalid day of the week."
+                }
+                //TODO: Fill out
+                addWeeklyShiftDB();
+            }
+            if(shiftType == "singleday") {
+                validDate(selectedDay, selectedMonthIdx, yearlyInfo[selectedYearIdx]);
+                //TODO: Fill out
+                addSingleDayShiftDB();
+            }
         }
         catch(err) {
             setAddedMsg(err);
         }
-
-
-        // console.log(`${shiftNameField}: ${startHour}:${startMinute} ${startTimeOfDay} - ${finishHour}:${finishMinute} ${finishTimeOfDay}`);
-        // if(shiftType == "weekly") {
-        //     console.log(`${dayOfWeek}s of ${yearlyInfo[selectedYearIdx].year}`)
-        // }
-        // if(shiftType == "singleday") {
-        //     console.log(`${months[selectedMonthIdx]} ${selectedDay} of ${yearlyInfo[selectedYearIdx].year}`)
-        // }
     }
 
     //TODO: Add year to shift page
