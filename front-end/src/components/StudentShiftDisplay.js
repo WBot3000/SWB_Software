@@ -23,7 +23,7 @@ function createWeeklyShifts(organizedShifts) {
     return <ul>
         {organizedShifts?.map((shifts, dayIdx) => (
             <li>
-                <h3>{daysOfWeek[(dayIdx + 1) % 7]}</h3>
+                <h3>{daysOfWeek[dayIdx]}</h3>
                 {/*Gets the individual shifts */}
                 <ul>
                     {shifts.map(shift => (

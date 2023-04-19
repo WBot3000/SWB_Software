@@ -476,6 +476,7 @@ export const getScheduleShiftList = () => {
             type: 'Single Day'
         },
     ];
+}
 
 /*
 
